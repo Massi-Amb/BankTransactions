@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BankTransactions.Models.Transaction>
+
+@{
+    ViewData["Title"] = "Transaction List";
+}
+
+<div class="row">
+    <div> 
+        <h1 class="text-center"><b>Transaction List</b></h1>
+        <hr/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BeneficiaryName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BankName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SWIFTCODE)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        <a asp-action="Create" class="btn btn-sm btn-success"><i class="fa-solid fa-plus"></i>New</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BeneficiaryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SWIFTCODE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+
+                            <form asp-action="Delete" asp-route-id="@item.TransactionId">
+                                <div class="btn-group btn-group-sm"></div>
+                                <a asp-action="Create" asp-route-id="@item.TransactionId" class="btn btn-sm btn-warning">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a> |
+                                <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this record?')">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
